@@ -1,40 +1,33 @@
 package main
 
 import (
-	"fmt"
+	"net"
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
-	"io"
-	"net/http"
 )
 
 func main() {
 	a := app.New()
 	w := a.NewWindow("Tally Bridge Connector")
 
-	label_ip := widget.NewLabel("Your ip address is: ")
-	label_ip_display := widget.NewLabel("")
+	indicator_localhost := widget.NewLabel("")
 
-	btn := widget.NewButton("Disply ip", func() {
-		resp, err := http.Get("https://api.ipify.org?format=text")
+	btn_check_localhost := widget.NewButton("Check Tally Server", func() {
+		connection, err := net.Dial("tcp", "localhost:9000")
 		if err != nil {
-			fmt.Println(err)
+			indicator_localhost.SetText("Please turn on Tally Server: " + err.Error())
+			return
 		}
-		defer resp.Body.Close()
-		body, err := io.ReadAll(resp.Body)
-		if err != nil {
-			fmt.Println(err)
-		}
-		fmt.Println(body)
-		label_ip_display.SetText(string(body))
+		defer connection.Close()
+
+		indicator_localhost.SetText("Tally Server is running")
 	})
 
 	w.SetContent(
 		container.NewVBox(
-			label_ip,
-			label_ip_display,
-			btn,
+			indicator_localhost,
+			btn_check_localhost,
 		),
 	)
 
