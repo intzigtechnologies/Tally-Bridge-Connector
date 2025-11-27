@@ -1,10 +1,11 @@
 package main
 
 import (
+	"net"
+
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
-	"net"
 )
 
 func main() {
@@ -14,7 +15,7 @@ func main() {
 	indicator_localhost := widget.NewLabel("")
 
 	btn_check_localhost := widget.NewButton("Check Tally Server", func() {
-		connection, err := net.Dial("tcp", "localhost:9000")
+		connection, err := net.Dial("udp", "localhost:9000")
 		if err != nil {
 			indicator_localhost.SetText("Please turn on Tally Server: " + err.Error())
 			return
