@@ -3,7 +3,7 @@ TARGET_NAME := Tally Connector
 # Define the source file
 SOURCE_FILE := main.go
 
-# --- Platform-specific variables ---
+# --- Platform-specific variables ---fdg
 
 # Define the linker flags. 
 # The -H=windowsgui flag tells the linker to create a GUI application 
