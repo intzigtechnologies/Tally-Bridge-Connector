@@ -15,7 +15,7 @@ func main() {
 	indicator_localhost := widget.NewLabel("")
 
 	btn_check_localhost := widget.NewButton("Check Tally Server", func() {
-		connection, err := net.Dial("udp", "localhost:9000")
+		connection, err := net.Dial("tcp", "localhost:9000")
 		if err != nil {
 			indicator_localhost.SetText("Please turn on Tally Server: " + err.Error())
 			return
