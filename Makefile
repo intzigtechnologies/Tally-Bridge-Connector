@@ -5,7 +5,7 @@ SOURCE_FILE := main.go
 
 # --- Platform-specific variables ---fdg
 
-# Define the linker flags. 
+# Define the linker flags. dd
 # The -H=windowsgui flag tells the linker to create a GUI application 
 # for Windows, suppressing the console window.
 # We use the shell 'cmd' to check the GOOS environment variable.
